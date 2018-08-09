@@ -158,10 +158,15 @@ namespace Backend.Transformations
 				this.parameters.Add(parameter.Name, p);
 			}
 
+            if(method.ContainingType.ToString().Contains("System.BitConverter") && method.Name.Value== "ToInt32")
+            {
+
+            }
 			foreach (var local in method.Body.LocalVariables)
 			{
 				var name = GetLocalSourceName(local);
-				var l = new LocalVariable(name, method) { Type = local.Type };
+                var type = GetParameterType(local.Type, local.IsReference);
+                var l = new LocalVariable(name, method) { Type = type };
 				this.locals.Add(local, l);
 			}
 		}

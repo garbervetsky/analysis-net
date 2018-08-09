@@ -68,7 +68,8 @@ namespace Backend.Analyses
 
                     // Set the null variable a type.
                     if (argument.Type == null ||
-                        parameter.Type.TypeCode == PrimitiveTypeCode.Boolean)
+                        parameter.Type.TypeCode == PrimitiveTypeCode.Boolean
+                        || TypeHelper.IsPrimitiveInteger(parameter.Type))
                     {
                         argument.Type = parameter.Type;
                     }
@@ -185,6 +186,11 @@ namespace Backend.Analyses
             public override void Visit(ConvertInstruction instruction)
             {
                 var type = instruction.Operand.Type;
+
+                if(instruction.ConversionType.Equals(Types.Instance.NativePointerType))
+                {
+                    instruction.ConversionType = instruction.Operand.Type;
+                }
 
                 switch (instruction.Operation)
                 {

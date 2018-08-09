@@ -180,7 +180,7 @@ namespace Backend.Utils
 				case OperationCode.Ldind_I4:
 				case OperationCode.Stind_I4:
 				case OperationCode.Stelem_I4:
-				case OperationCode.Conv_I4:
+                case OperationCode.Conv_I4:
 				case OperationCode.Conv_Ovf_I4:
 				case OperationCode.Conv_Ovf_I4_Un:	return Types.Instance.PlatformType.SystemInt32;
 				case OperationCode.Ldc_I8:
